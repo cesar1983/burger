@@ -40,9 +40,13 @@ class BurgerBuilder extends Component {
 
   addIngredientHandler = (type) => {
     const newIngredientCounter = this.state.ingredients[type] + 1;
+
+    // Spread Operator. Uso isso ao invés de "updatedIngredients = this.state.ingredients"
+    // para criar um clone do objeto, e não uma referência do copiado. Se usar referencia pode dar merdas
     const updatedIngredients = {
       ...this.state.ingredients,
     };
+
     updatedIngredients[type] = newIngredientCounter;
 
     const priceAddition = INGREDIENTS_PRICES[type];
