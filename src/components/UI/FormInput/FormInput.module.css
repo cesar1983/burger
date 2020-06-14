@@ -29,3 +29,8 @@
 .Invalid {
   background-color: lightcoral;
 }
+
+.ErrorTag {
+  display: block;
+  color: red;
+}

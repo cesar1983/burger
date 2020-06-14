@@ -7,8 +7,15 @@ const formInput = (props) => {
 
   const inputClasses = [classes.InputElement];
 
+  let errorTag = "";
   if (props.touched && props.invalid && props.shouldBeValidated) {
     inputClasses.push(classes.Invalid);
+
+    if (props.validationError) {
+      errorTag = (
+        <div className={classes.ErrorTag}>{props.validationError}</div>
+      );
+    }
   }
 
   // eslint-disable-next-line default-case
@@ -55,6 +62,7 @@ const formInput = (props) => {
     <div className={classes.Input}>
       <label className={classes.Label}>{props.label}</label>
       {inputElement}
+      {errorTag}
     </div>
   );
 };
