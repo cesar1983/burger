@@ -5,12 +5,18 @@ import classes from "./FormInput.module.css";
 const formInput = (props) => {
   let inputElement = null;
 
+  const inputClasses = [classes.InputElement];
+
+  if (props.touched && props.invalid && props.shouldBeValidated) {
+    inputClasses.push(classes.Invalid);
+  }
+
   // eslint-disable-next-line default-case
   switch (props.elementType) {
     case "input":
       inputElement = (
         <input
-          className={classes.InputElement}
+          className={inputClasses.join(" ")}
           {...props.elementConfig}
           value={props.value}
           onChange={props.changed}
@@ -20,7 +26,7 @@ const formInput = (props) => {
     case "textarea":
       inputElement = (
         <textarea
-          className={classes.InputElement}
+          className={inputClasses.join(" ")}
           {...props.elementConfig}
           onChange={props.changed}
         >
@@ -38,7 +44,7 @@ const formInput = (props) => {
       });
 
       inputElement = (
-        <select className={classes.InputElement} onChange={props.changed}>
+        <select className={inputClasses.join(" ")} onChange={props.changed}>
           {options}
         </select>
       );
