@@ -8,6 +8,7 @@ import FormInput from "../../../components/UI/FormInput/FormInput";
 
 class ContactData extends Component {
   state = {
+    isValid: false,
     orderForm: {
       name: {
         elementType: "input",
@@ -104,6 +105,8 @@ class ContactData extends Component {
             { value: "cheapest", label: "Cheapest" },
           ],
         },
+        validation: {},
+        valid: true,
         value: "",
       },
     },
@@ -145,8 +148,8 @@ class ContactData extends Component {
       ...this.state.orderForm,
     };
     const updatedFormElement = { ...updatedForm[elementId] };
-    updatedFormElement.value = event.target.value;
 
+    updatedFormElement.value = event.target.value;
     updatedFormElement.valid = this.checkValidity(
       updatedFormElement.value,
       updatedFormElement.validation
@@ -155,9 +158,11 @@ class ContactData extends Component {
     updatedFormElement.touched = true;
     updatedForm[elementId] = updatedFormElement;
 
-    // console.log(updatedFormElement);
-
-    this.setState({ orderForm: updatedForm });
+    let formIsValid = true;
+    for (let inputIdentifier in updatedForm) {
+      formIsValid = updatedForm[inputIdentifier].valid && formIsValid;
+    }
+    this.setState({ orderForm: updatedForm, isValid: formIsValid });
   };
 
   checkValidity = (value, rules) => {
@@ -208,7 +213,9 @@ class ContactData extends Component {
       <form onSubmit={this.orderHandler}>
         {formElements}
 
-        <Button buttonType="Success">Order</Button>
+        <Button buttonType="Success" disabled={!this.state.isValid}>
+          Order
+        </Button>
       </form>
     );
 
