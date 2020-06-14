@@ -32,7 +32,7 @@ class Checkout extends Component {
   };
 
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     const { ingredients } = this.state;
     return (
       <div>
