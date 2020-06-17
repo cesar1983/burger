@@ -3,8 +3,9 @@ import axios from "../../../axios-orders";
 
 import Button from "../../../components/UI/Button/Button";
 import Spinner from "../../../components/UI/Spinner/Spinner";
-import classes from "./ContactData.module.css";
 import FormInput from "../../../components/UI/FormInput/FormInput";
+
+import classes from "./ContactData.module.css";
 
 class ContactData extends Component {
   state = {
@@ -105,9 +106,9 @@ class ContactData extends Component {
             { value: "cheapest", label: "Cheapest" },
           ],
         },
+        value: "fastest",
         validation: {},
         valid: true,
-        value: "",
       },
     },
     totalPrice: 0,
