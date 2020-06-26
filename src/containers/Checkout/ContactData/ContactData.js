@@ -9,7 +9,6 @@ import classes from "./ContactData.module.css";
 
 class ContactData extends Component {
   state = {
-    isValid: false,
     orderForm: {
       name: {
         elementType: "input",
@@ -111,6 +110,7 @@ class ContactData extends Component {
         valid: true,
       },
     },
+    isValid: false,
     totalPrice: 0,
   };
 
@@ -125,7 +125,7 @@ class ContactData extends Component {
         formElementIdenfitifer
       ].value;
     }
-    console.log("formData", formData);
+
     const order = {
       orderData: formData,
       ingredients: this.props.ingredients,
