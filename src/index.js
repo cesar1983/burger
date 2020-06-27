@@ -2,15 +2,17 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import { BrowserRouter } from "react-router-dom";
 
 import "./index.css";
 
-import { createStore } from "redux";
-import Provider from "react-redux";
-import burgerReducer from "./store/reducers/burger";
+import { BrowserRouter } from "react-router-dom";
 
-const burgerStore = createStore(burgerReducer);
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+
+import reducer from "./store/reducers/reducer";
+
+const burgerStore = createStore(reducer);
 
 const app = (
   <Provider store={burgerStore}>
