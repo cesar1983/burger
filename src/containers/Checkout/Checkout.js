@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { Route } from "react-router-dom";
+import { Route, Link } from "react-router-dom";
 import ContactData from "./ContactData/ContactData";
 
 import CheckoutSummary from "../../components/Order/CheckoutSummary/CheckoutSummary";
