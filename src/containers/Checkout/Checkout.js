@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { Route, Link } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 import ContactData from "./ContactData/ContactData";
 
 import CheckoutSummary from "../../components/Order/CheckoutSummary/CheckoutSummary";
@@ -34,19 +34,31 @@ class Checkout extends Component {
   };
 
   render() {
-    // console.log(this.state);
-    // const { ingredients } = this.state;
+    let summary = <Redirect to="/" />;
+
+    if (this.props.ings) {
+      const purchasedRedirect = this.props.purchased ? (
+        <Redirect to="/" />
+      ) : null;
+      summary = (
+        <>
+          {purchasedRedirect}
+          <CheckoutSummary
+            handleCancelButtonClick={this.handleCancelButton}
+            handleContinueButtonClick={this.handleContinueButton}
+            ingredients={this.props.ings}
+          />
+          <Route
+            path={this.props.match.path + "/contact-data"}
+            component={ContactData}
+          />
+        </>
+      );
+    }
+
     return (
       <div>
-        <CheckoutSummary
-          handleCancelButtonClick={this.handleCancelButton}
-          handleContinueButtonClick={this.handleContinueButton}
-          ingredients={this.props.ings}
-        />
-        <Route
-          path={this.props.match.path + "/contact-data"}
-          component={ContactData}
-        />
+        {summary}
         {/* <Route
           path={this.props.match.path + "/contact-data"}
           render={(props) => (
@@ -64,8 +76,9 @@ class Checkout extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    ings: state.ingredients,
-    price: state.totalPrice,
+    ings: state.burgerReducer.ingredients,
+    price: state.burgerReducer.totalPrice,
+    purchased: state.orderReducer.purchased,
   };
 };
 
