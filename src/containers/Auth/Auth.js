@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import FormInput from "../../components/UI/FormInput/FormInput";
 import Button from "../../components/UI/Button/Button";
+import Spinner from "../../components/UI/Spinner/Spinner";
 
 import { connect } from "react-redux";
 import { auth } from "../../store/actions";
@@ -115,7 +116,7 @@ class Auth extends Component {
         config: this.state.controls[key],
       });
     }
-    const formElements = formElementsArr.map((element) => {
+    let formElements = formElementsArr.map((element) => {
       return (
         <FormInput
           key={element.id}
@@ -130,8 +131,19 @@ class Auth extends Component {
         />
       );
     });
+
+    let errorMessage = null;
+    if (this.props.error) {
+      errorMessage = this.props.error.message;
+    }
+
+    if (this.props.loading) {
+      formElements = <Spinner />;
+    }
+
     return (
       <div>
+        {errorMessage}
         <form onSubmit={this.submitHandler} className={classes.Auth}>
           {formElements}
 
@@ -150,6 +162,13 @@ class Auth extends Component {
   }
 }
 
+const mapsTateToProps = (state) => {
+  return {
+    loading: state.authReducer.loading,
+    error: state.authReducer.error,
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     onAuth: (email, password, isSignup) =>
@@ -157,4 +176,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(Auth);
+export default connect(mapsTateToProps, mapDispatchToProps)(Auth);
