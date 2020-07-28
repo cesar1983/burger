@@ -179,6 +179,7 @@ class ContactData extends Component {
   };
 
   render() {
+    // Transforma os campos do objeto acima em um array pra poder iterar com map
     const formElementsArr = [];
     for (let key in this.state.orderForm) {
       formElementsArr.push({
