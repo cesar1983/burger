@@ -29,6 +29,11 @@
   color: #fff;
 }
 
+.Alert {
+  background-color: darkslateblue;
+  color: #fff;
+}
+
 .Button:disabled {
   background-color: darkorange;
   color: #ccc;
