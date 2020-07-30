@@ -1,1 +1,10 @@
-# burger project from udacity react/redux course
+# burger project from udemy react/redux course
+
+
+- react
+- high order components
+- react-router
+- axios
+- dynamic form builder with validation
+- redux
+- hooks
