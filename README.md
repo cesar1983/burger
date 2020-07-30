@@ -2,6 +2,7 @@
 
 
 - react
+- styled components
 - high order components
 - react-router
 - axios
