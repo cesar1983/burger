@@ -80,8 +80,8 @@ class ContactData extends Component {
         value: "",
         validation: {
           required: true,
-          minLength: 5,
-          maxLength: 5,
+          minLength: 0,
+          maxLength: 9,
         },
         valid: false,
         validationError: "Please, enter a valid Zip code",
@@ -134,7 +134,7 @@ class ContactData extends Component {
       price: this.props.price,
     };
 
-    this.props.onOrderBurger(order);
+    this.props.onOrderBurger(order, this.props.token);
   };
 
   inputChangedHandler = (event, elementId) => {
@@ -232,13 +232,14 @@ const mapStateToProps = (state) => {
     ings: state.burgerReducer.ingredients,
     price: state.burgerReducer.totalPrice,
     loading: state.orderReducer.loading,
+    token: state.authReducer.token,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onOrderBurger: (orderData) => {
-      dispatch(actions.purchaseBurger(orderData));
+    onOrderBurger: (orderData, token) => {
+      dispatch(actions.purchaseBurger(orderData, token));
     },
   };
 };
