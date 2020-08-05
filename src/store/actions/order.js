@@ -1,9 +1,9 @@
-import * as actionTypes from "./actionTypes";
-import axios from "../../axios-orders";
+import * as actionTypes from './actionTypes';
+import axios from '../../axios-orders';
 
 export const purchaseBurgerSuccess = (id, orderData) => {
-  console.log("[purchaseBurgerSuccess] id", id);
-  console.log("[purchaseBurgerSuccess] orderData", id);
+  console.log('[purchaseBurgerSuccess] id', id);
+  console.log('[purchaseBurgerSuccess] orderData', id);
   return {
     type: actionTypes.PURCHASE_BURGER_SUCCESS,
     orderId: id,
@@ -28,10 +28,10 @@ export const purchaseBurger = (orderData, token) => {
   return (dispatch) => {
     dispatch(purchaseBurgerStart());
     axios
-      .post("/orders.json?auth=" + token, orderData)
+      .post('/orders.json?auth=' + token, orderData)
       .then((response) => {
-        console.log("[response.data]", response.data);
-        console.log("[orderData]", orderData);
+        console.log('[response.data]', response.data);
+        console.log('[orderData]', orderData);
         dispatch(purchaseBurgerSuccess(response.data.name, orderData));
       })
       .catch((error) => {
@@ -71,7 +71,7 @@ export const fetchOrders = (token) => {
   return (dispatch) => {
     dispatch(fetchOrdersInit());
     axios
-      .get("/orders.json?auth=" + token)
+      .get('/orders.json?auth=' + token)
       .then((res) => {
         const fetchedOrders = [];
         for (let key in res.data) {

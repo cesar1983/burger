@@ -1,5 +1,5 @@
-import * as actionTypes from "../actions/actionTypes";
-import { updatedObject } from "../utility";
+import * as actionTypes from '../actions/actionTypes';
+import { updatedObject } from '../utility';
 
 const initialState = {
   orders: [],

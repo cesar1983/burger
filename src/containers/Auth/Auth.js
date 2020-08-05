@@ -1,43 +1,45 @@
-import React, { Component } from "react";
-import FormInput from "../../components/UI/FormInput/FormInput";
-import Button from "../../components/UI/Button/Button";
-import Spinner from "../../components/UI/Spinner/Spinner";
+import React, { Component } from 'react';
+import FormInput from '../../components/UI/FormInput/FormInput';
+import Button from '../../components/UI/Button/Button';
+import Spinner from '../../components/UI/Spinner/Spinner';
 
-import { connect } from "react-redux";
-import { auth } from "../../store/actions";
+import { connect } from 'react-redux';
+import { auth, setAuthRedirectPath } from '../../store/actions';
 
-import classes from "./Auth.module.css";
+import { Redirect } from 'react-router-dom';
+
+import classes from './Auth.module.css';
 
 class Auth extends Component {
   state = {
     controls: {
       email: {
-        elementType: "input",
+        elementType: 'input',
         elementConfig: {
-          type: "text",
-          placeholder: "E-mail",
+          type: 'text',
+          placeholder: 'E-mail',
         },
-        value: "",
+        value: '',
         validation: {
           required: true,
           email: true,
         },
         valid: false,
-        validationError: "Please, enter a valid e-mail",
+        validationError: 'Please, enter a valid e-mail',
         touched: false,
       },
       password: {
-        elementType: "input",
+        elementType: 'input',
         elementConfig: {
-          type: "password",
-          placeholder: "Password",
+          type: 'password',
+          placeholder: 'Password',
         },
-        value: "",
+        value: '',
         validation: {
           required: true,
         },
         valid: false,
-        validationError: "Please, enter your password",
+        validationError: 'Please, enter your password',
         touched: false,
       },
     },
@@ -55,12 +57,18 @@ class Auth extends Component {
     });
   };
 
+  componentDidMount() {
+    if (!this.props.buildingBurger && this.props.authRedirect !== '/') {
+      this.props.onSetAuthRedirectPath();
+    }
+  }
+
   checkValidity = (value, rules) => {
     let isValid = true;
     const trimedValue = value.trim();
 
     if (rules.required) {
-      isValid = trimedValue !== "" && isValid;
+      isValid = trimedValue !== '' && isValid;
     }
 
     if (rules.minLength) {
@@ -73,7 +81,7 @@ class Auth extends Component {
 
     if (rules.email) {
       const regexp = new RegExp(
-        "[a-zA-Z0-9_\\.\\+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-\\.]+"
+        '[a-zA-Z0-9_\\.\\+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-\\.]+'
       );
       isValid = regexp.test(trimedValue) && isValid;
     }
@@ -137,24 +145,30 @@ class Auth extends Component {
       errorMessage = this.props.error.message;
     }
 
+    let authRedirect = null;
+    if (this.props.isAuth) {
+      authRedirect = <Redirect to={this.props.authRedirect} />;
+    }
+
     if (this.props.loading) {
       formElements = <Spinner />;
     }
 
     return (
       <div>
+        {authRedirect}
         {errorMessage}
         <form onSubmit={this.submitHandler} className={classes.Auth}>
           {formElements}
 
           <Button buttonType="Success">
-            {this.state.isSignup ? "Sign up" : "Sign in"}
+            {this.state.isSignup ? 'Sign up' : 'Sign in'}
           </Button>
 
           <br />
           <br />
           <Button buttonType="Alert" clicked={this.switchAuthModeHandler}>
-            Switch to {this.state.isSignup ? "Sign in" : "Sign up"}
+            Switch to {this.state.isSignup ? 'Sign in' : 'Sign up'}
           </Button>
         </form>
       </div>
@@ -166,6 +180,9 @@ const mapsTateToProps = (state) => {
   return {
     loading: state.authReducer.loading,
     error: state.authReducer.error,
+    isAuth: state.authReducer.token !== null,
+    buildingBurger: state.burgerReducer.building,
+    authRedirect: state.authReducer.authRedirectPath,
   };
 };
 
@@ -173,6 +190,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onAuth: (email, password, isSignup) =>
       dispatch(auth(email, password, isSignup)),
+    onSetAuthRedirectPath: () => dispatch(setAuthRedirectPath('/')),
   };
 };
 

@@ -1,5 +1,5 @@
-import * as actionTypes from "./actionTypes";
-import axios from "axios";
+import * as actionTypes from './actionTypes';
+import axios from 'axios';
 
 export const authStart = () => {
   return {
@@ -32,8 +32,8 @@ export const auth = (email, password, isSignup) => {
     };
 
     const endpoint = isSignup
-      ? "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCk8HFYjE_aB37O04xE9JLhWlsaGFH916g"
-      : "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCk8HFYjE_aB37O04xE9JLhWlsaGFH916g";
+      ? 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCk8HFYjE_aB37O04xE9JLhWlsaGFH916g'
+      : 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCk8HFYjE_aB37O04xE9JLhWlsaGFH916g';
 
     axios
       .post(endpoint, authData)
@@ -59,5 +59,12 @@ export const checkAuthTimeout = (expirationTime) => {
 export const logout = () => {
   return {
     type: actionTypes.AUTH_LOGOUT,
+  };
+};
+
+export const setAuthRedirectPath = (path) => {
+  return {
+    type: actionTypes.SET_AUTH_REDIRECT_PATH,
+    path: path,
   };
 };
