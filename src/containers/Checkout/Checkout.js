@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
-import { Route, Redirect } from "react-router-dom";
-import ContactData from "./ContactData/ContactData";
+import { Route, Redirect } from 'react-router-dom';
+import ContactData from './ContactData/ContactData';
 
-import CheckoutSummary from "../../components/Order/CheckoutSummary/CheckoutSummary";
+import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary';
 
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 
 class Checkout extends Component {
   // state = {
@@ -30,7 +30,7 @@ class Checkout extends Component {
   };
 
   handleContinueButton = () => {
-    this.props.history.replace("/checkout/contact-data");
+    this.props.history.replace('/checkout/contact-data');
   };
 
   render() {
@@ -49,7 +49,7 @@ class Checkout extends Component {
             ingredients={this.props.ings}
           />
           <Route
-            path={this.props.match.path + "/contact-data"}
+            path={this.props.match.path + '/contact-data'}
             component={ContactData}
           />
         </>

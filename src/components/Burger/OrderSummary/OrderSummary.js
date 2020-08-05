@@ -1,12 +1,12 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
-import Aux from "../../../hoc/Aux/Aux";
-import Button from "../../UI/Button/Button";
+import Aux from '../../../hoc/Aux/Aux';
+import Button from '../../UI/Button/Button';
 
 class OrderSummary extends Component {
   // this can be a functional component
   componentWillUpdate() {
-    console.log("[OrderSummary] willUpdate");
+    console.log('[OrderSummary] willUpdate');
   }
 
   render() {
@@ -14,8 +14,8 @@ class OrderSummary extends Component {
       (igKey) => {
         return (
           <li key={igKey}>
-            {igKey}:{" "}
-            <span style={{ textTransform: "capitalize" }}>
+            {igKey}:{' '}
+            <span style={{ textTransform: 'capitalize' }}>
               {this.props.ingredients[igKey]}
             </span>
           </li>

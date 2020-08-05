@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react';
 
-import classes from "./BuildControls.module.css";
-import BuildControl from "./BuildControl/BuildControl";
+import classes from './BuildControls.module.css';
+import BuildControl from './BuildControl/BuildControl';
 
 const controls = [
-  { label: "Salad", type: "salad" },
-  { label: "Bacon", type: "bacon" },
-  { label: "Cheesseee", type: "cheese" },
-  { label: "Meat", type: "meat" },
+  { label: 'Salad', type: 'salad' },
+  { label: 'Bacon', type: 'bacon' },
+  { label: 'Cheesseee', type: 'cheese' },
+  { label: 'Meat', type: 'meat' },
 ];
 
 const buildControls = (props) => (
@@ -30,7 +30,7 @@ const buildControls = (props) => (
       className={classes.OrderButton}
       onClick={props.ordered}
     >
-      {props.isAuth ? "SHOP NOW" : "SIGN UP"}
+      {props.isAuth ? 'SHOP NOW' : 'SIGN UP'}
     </button>
   </div>
 );

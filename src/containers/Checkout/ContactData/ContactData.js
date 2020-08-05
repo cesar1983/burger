@@ -1,115 +1,115 @@
-import React, { Component } from "react";
-import axios from "../../../axios-orders";
-import withErrorHandler from "../../../hoc/withErrorHandler/WithErrorHandler";
+import React, { Component } from 'react';
+import axios from '../../../axios-orders';
+import withErrorHandler from '../../../hoc/withErrorHandler/WithErrorHandler';
 
-import { connect } from "react-redux";
-import * as actions from "../../../store/actions/index";
+import { connect } from 'react-redux';
+import * as actions from '../../../store/actions/index';
 
-import Button from "../../../components/UI/Button/Button";
-import Spinner from "../../../components/UI/Spinner/Spinner";
-import FormInput from "../../../components/UI/FormInput/FormInput";
+import Button from '../../../components/UI/Button/Button';
+import Spinner from '../../../components/UI/Spinner/Spinner';
+import FormInput from '../../../components/UI/FormInput/FormInput';
 
-import classes from "./ContactData.module.css";
+import classes from './ContactData.module.css';
 
 class ContactData extends Component {
   state = {
     orderForm: {
       name: {
-        elementType: "input",
+        elementType: 'input',
         elementConfig: {
-          type: "text",
-          placeholder: "Name",
+          type: 'text',
+          placeholder: 'Name',
         },
-        value: "",
+        value: '',
         validation: {
           required: true,
           minLength: 5,
         },
         valid: false,
-        validationError: "Please, enter a valid name",
+        validationError: 'Please, enter a valid name',
         touched: false,
       },
       email: {
-        elementType: "input",
+        elementType: 'input',
         elementConfig: {
-          type: "text",
-          placeholder: "E-mail",
+          type: 'text',
+          placeholder: 'E-mail',
         },
-        value: "",
+        value: '',
         validation: {
           required: true,
         },
         valid: false,
-        validationError: "Please, enter a valid e-mail",
+        validationError: 'Please, enter a valid e-mail',
         touched: false,
       },
       street: {
-        elementType: "input",
+        elementType: 'input',
         elementConfig: {
-          type: "text",
-          placeholder: "Street",
+          type: 'text',
+          placeholder: 'Street',
         },
-        value: "",
+        value: '',
         validation: {
           required: true,
         },
         valid: false,
-        validationError: "Please, enter a valid street name",
+        validationError: 'Please, enter a valid street name',
         touched: false,
       },
       city: {
-        elementType: "input",
+        elementType: 'input',
         elementConfig: {
-          type: "text",
-          placeholder: "City",
+          type: 'text',
+          placeholder: 'City',
         },
-        value: "",
+        value: '',
         validation: {
           required: true,
         },
         valid: false,
-        validationError: "Please, enter a valid city name",
+        validationError: 'Please, enter a valid city name',
         touched: false,
       },
       zipCode: {
-        elementType: "input",
+        elementType: 'input',
         elementConfig: {
-          type: "text",
-          placeholder: "Zip Code",
+          type: 'text',
+          placeholder: 'Zip Code',
         },
-        value: "",
+        value: '',
         validation: {
           required: true,
           minLength: 0,
           maxLength: 9,
         },
         valid: false,
-        validationError: "Please, enter a valid Zip code",
+        validationError: 'Please, enter a valid Zip code',
         touched: false,
       },
       country: {
-        elementType: "input",
+        elementType: 'input',
         elementConfig: {
-          type: "text",
-          placeholder: "Country",
+          type: 'text',
+          placeholder: 'Country',
         },
-        value: "",
+        value: '',
         validation: {
           required: true,
         },
         valid: false,
-        validationError: "Please, enter a valid country name",
+        validationError: 'Please, enter a valid country name',
         touched: false,
       },
       deliveryMethod: {
-        elementType: "select",
+        elementType: 'select',
         elementConfig: {
           options: [
-            { value: "fastest", label: "Fastest" },
-            { value: "cheapest", label: "Cheapest" },
+            { value: 'fastest', label: 'Fastest' },
+            { value: 'cheapest', label: 'Cheapest' },
           ],
         },
-        value: "fastest",
+        value: 'fastest',
         validation: {},
         valid: true,
       },
@@ -164,7 +164,7 @@ class ContactData extends Component {
     const trimedValue = value.trim();
 
     if (rules.required) {
-      isValid = trimedValue !== "" && isValid;
+      isValid = trimedValue !== '' && isValid;
     }
 
     if (rules.minLength) {

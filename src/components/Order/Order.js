@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import classes from "./Order.module.css";
+import classes from './Order.module.css';
 
 const order = (props) => {
   const ingredients = [];
@@ -17,11 +17,11 @@ const order = (props) => {
       <span
         key={ig.name}
         style={{
-          textTransform: "capitalize",
-          display: "inline-block",
-          marginRight: "8px",
-          border: "1px #EEE solid",
-          padding: "8px 12px",
+          textTransform: 'capitalize',
+          display: 'inline-block',
+          marginRight: '8px',
+          border: '1px #EEE solid',
+          padding: '8px 12px',
         }}
       >
         {ig.name} ({ig.amount})

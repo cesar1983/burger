@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-import Aux from "../Aux/Aux";
-import Toolbar from "../../components/Navigation/Toolbar/Toolbar";
-import SideDrawer from "../../components/Navigation/Sidedrawer/Sidedrawer";
+import Aux from '../Aux/Aux';
+import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
+import SideDrawer from '../../components/Navigation/Sidedrawer/Sidedrawer';
 
-import classes from "./Layout.module.css";
+import classes from './Layout.module.css';
 
 class Layout extends Component {
   state = {
