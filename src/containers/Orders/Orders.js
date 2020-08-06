@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import Order from "../../components/Order/Order";
-import axios from "../../axios-orders";
-import withErrorHandler from "../../hoc/withErrorHandler/WithErrorHandler";
-import Spinner from "../../components/UI/Spinner/Spinner";
-import * as actions from "../../store/actions/index";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import Order from '../../components/Order/Order';
+import axios from '../../axios-orders';
+import withErrorHandler from '../../hoc/withErrorHandler/WithErrorHandler';
+import Spinner from '../../components/UI/Spinner/Spinner';
+import * as actions from '../../store/actions/index';
 
 class Orders extends Component {
   state = {
@@ -13,7 +13,7 @@ class Orders extends Component {
   };
 
   componentDidMount() {
-    this.props.fetchOrders(this.props.token);
+    this.props.fetchOrders(this.props.token, this.props.userId);
   }
 
   render() {
@@ -39,12 +39,14 @@ const mapStateToProps = (state) => {
     loading: state.orderReducer.loading,
     orders: state.orderReducer.orders,
     token: state.authReducer.token,
+    userId: state.authReducer.userId,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchOrders: (token) => dispatch(actions.fetchOrders(token)),
+    fetchOrders: (token, userId) =>
+      dispatch(actions.fetchOrders(token, userId)),
   };
 };
 

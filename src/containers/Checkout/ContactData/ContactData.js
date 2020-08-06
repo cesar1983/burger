@@ -132,6 +132,7 @@ class ContactData extends Component {
       orderData: formData,
       ingredients: this.props.ings,
       price: this.props.price,
+      userId: this.props.userId,
     };
 
     this.props.onOrderBurger(order, this.props.token);
@@ -166,11 +167,9 @@ class ContactData extends Component {
     if (rules.required) {
       isValid = trimedValue !== '' && isValid;
     }
-
     if (rules.minLength) {
       isValid = trimedValue.length >= rules.minLength && isValid;
     }
-
     if (rules.maxLength) {
       isValid = trimedValue.length <= rules.maxLength && isValid;
     }
@@ -233,6 +232,7 @@ const mapStateToProps = (state) => {
     price: state.burgerReducer.totalPrice,
     loading: state.orderReducer.loading,
     token: state.authReducer.token,
+    userId: state.authReducer.userId,
   };
 };
 
