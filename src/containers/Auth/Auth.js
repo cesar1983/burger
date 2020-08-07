@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import { updatedObject, checkValidity } from '../../shared/utility';
+import { auth, setAuthRedirectPath } from '../../store/actions';
+
 import FormInput from '../../components/UI/FormInput/FormInput';
 import Button from '../../components/UI/Button/Button';
 import Spinner from '../../components/UI/Spinner/Spinner';
-
-import { connect } from 'react-redux';
-import { auth, setAuthRedirectPath } from '../../store/actions';
-
-import { Redirect } from 'react-router-dom';
 
 import classes from './Auth.module.css';
 
@@ -63,45 +64,17 @@ class Auth extends Component {
     }
   }
 
-  checkValidity = (value, rules) => {
-    let isValid = true;
-    const trimedValue = value.trim();
-
-    if (rules.required) {
-      isValid = trimedValue !== '' && isValid;
-    }
-
-    if (rules.minLength) {
-      isValid = trimedValue.length >= rules.minLength && isValid;
-    }
-
-    if (rules.maxLength) {
-      isValid = trimedValue.length <= rules.maxLength && isValid;
-    }
-
-    if (rules.email) {
-      const regexp = new RegExp(
-        '[a-zA-Z0-9_\\.\\+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-\\.]+'
-      );
-      isValid = regexp.test(trimedValue) && isValid;
-    }
-
-    return isValid;
-  };
-
   inputChangedHandler = (event, elementId) => {
-    const updatedControls = {
-      ...this.state.controls,
-      [elementId]: {
-        ...this.state.controls[elementId],
+    const updatedControls = updatedObject(this.state.controls, {
+      [elementId]: updatedObject(this.state.controls[elementId], {
         value: event.target.value,
-        valid: this.checkValidity(
+        valid: checkValidity(
           event.target.value,
           this.state.controls[elementId].validation
         ),
         touched: true,
-      },
-    };
+      }),
+    });
 
     this.setState({ controls: updatedControls });
   };
